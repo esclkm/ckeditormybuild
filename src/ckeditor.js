@@ -5,7 +5,7 @@
 
 // The editor creator to use.
 import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
-
+import '@ckeditor/ckeditor5-build-classic/build/translations/ru';
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
 import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter';
 import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
@@ -27,6 +27,12 @@ import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
+import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
+import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
+import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
+import Subscript from '@ckeditor/ckeditor5-basic-styles/src/subscript';
+import Superscript from '@ckeditor/ckeditor5-basic-styles/src/superscript';
+import Highlight from '@ckeditor/ckeditor5-highlight/src/highlight';
 
 export default class ClassicEditor extends ClassicEditorBase {}
 
@@ -45,14 +51,21 @@ ClassicEditor.builtinPlugins = [
 	ImageCaption,
 	ImageStyle,
 	ImageToolbar,
-	ImageUpload,
+
+	// ImageUpload,
 	Link,
 	List,
 	MediaEmbed,
 	Paragraph,
 	PasteFromOffice,
 	Table,
-	TableToolbar
+	TableToolbar,
+	Alignment,
+	Underline,
+	Strikethrough,
+	Subscript,
+	Superscript,
+	Highlight
 ];
 
 // Editor configuration.
@@ -64,15 +77,22 @@ ClassicEditor.defaultConfig = {
 			'bold',
 			'italic',
 			'link',
+			'underline',
+			'strikethrough',
+			'subscript',
+			'superscript',
+			'highlight',
 			'bulletedList',
 			'numberedList',
-			'imageUpload',
+			// 'imageUpload',
 			'blockQuote',
 			'insertTable',
 			'mediaEmbed',
+			'alignment',
 			'undo',
 			'redo'
-		]
+		],
+		viewportTopOffset: 70
 	},
 	image: {
 		toolbar: [
@@ -90,5 +110,5 @@ ClassicEditor.defaultConfig = {
 		]
 	},
 	// This value must be kept in sync with the language defined in webpack.config.js.
-	language: 'en'
+	language: 'ru'
 };
