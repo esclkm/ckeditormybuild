@@ -1,6 +1,6 @@
 /**
- * @license Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
- * For licensing, see LICENSE.md.
+ * @license Copyright (c) 2014-2020, CKSource - Frederico Knabben. All rights reserved.
+ * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
 'use strict';
@@ -11,7 +11,7 @@ const path = require( 'path' );
 const webpack = require( 'webpack' );
 const { bundler, styles } = require( '@ckeditor/ckeditor5-dev-utils' );
 const CKEditorWebpackPlugin = require( '@ckeditor/ckeditor5-dev-webpack-plugin' );
-const UglifyJsWebpackPlugin = require( 'uglifyjs-webpack-plugin' );
+const TerserWebpackPlugin = require( 'terser-webpack-plugin' );
 
 module.exports = {
 	devtool: 'source-map',
@@ -31,14 +31,15 @@ module.exports = {
 
 	optimization: {
 		minimizer: [
-			new UglifyJsWebpackPlugin( {
+			new TerserWebpackPlugin( {
 				sourceMap: true,
-				uglifyOptions: {
+				terserOptions: {
 					output: {
 						// Preserve CKEditor 5 license comments.
 						comments: /^!/
 					}
-				}
+				},
+				extractComments: false
 			} )
 		]
 	},
@@ -47,7 +48,7 @@ module.exports = {
 		new CKEditorWebpackPlugin( {
 			// UI language. Language codes follow the https://en.wikipedia.org/wiki/ISO_639-1 format.
 			// When changing the built-in language, remember to also change it in the editor's configuration (src/ckeditor.js).
-			language: 'en',
+			language: 'ru',
 			additionalLanguages: 'all'
 		} ),
 		new webpack.BannerPlugin( {
@@ -68,7 +69,7 @@ module.exports = {
 					{
 						loader: 'style-loader',
 						options: {
-							singleton: true
+							injectType: 'singletonStyleTag'
 						}
 					},
 					{
